@@ -1,0 +1,25 @@
+# Compiled python files
+*.pyc
+
+# Emacs temp files
+*~
+\#.*\#
+
+# OSX folder attributes
+.DS_Store
+*.bak
+
+# IDE project files
+/.pydevproject # Pydev.org
+/.settings/org.eclipse.core.resources.prefs # Eclipse
+/.idea # PyCharm
+
+# Stackdumps
+*.stackdump
+
+# Fabric config file (generated)
+config.py
+
+# User WP test config file (generated)
+test_wp/wp-config.php
+
