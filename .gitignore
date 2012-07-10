@@ -23,3 +23,6 @@ config.py
 # User WP test config file (generated)
 test_wp/wp-config.php
 
+# WP local setup sql (generated)
+wp_setup_local_sql.sql
+

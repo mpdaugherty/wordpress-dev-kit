@@ -31,13 +31,17 @@ read -p "What is your desired MySQL DB Name? " DB_NAME
 read -p "What is your desired DB user name?  " DB_USERNAME
 read -p "What is your desired DB password?   " DB_PSWD
 
-echo "Run this SQL:
-
+LOCAL_SQL="
 create database $DB_NAME;
 create user '$DB_USERNAME'@'localhost' identified by '$DB_PSWD';
 GRANT ALL ON $DB_NAME.* to 'DB_USERNAME'@'localhost';
 FLUSH PRIVILEGES;
 "
+
+echo $LOCAL_SQL > wp_setup_local_sql.sql
+
+echo "Run this SQL:"
+cat wp_setup_local_sql.sql
 
 # TODO: RUN THE SQL
 
