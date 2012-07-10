@@ -43,11 +43,15 @@ echo $LOCAL_SQL > wp_setup_local_sql.sql
 echo "Run this SQL (saved in wp_setup_local_sql.sql):"
 cat wp_setup_local_sql.sql
 
-# TODO: RUN THE SQL
+read -p "If you'd like to run this SQL immediately, enter your MySQL root username (otherwise, enter nothing): " DB_ROOT_USER
+if [ $DB_ROOT_USER ]
+then
+    mysql -u $DB_ROOT_USER -p < wp_setup_local_sql.sql
+fi
 
 # TODO: make wp-config.php from info
 
 
-# Restore old values
+# Restore old values for variables
 SOURCE=$SOURCE_TEMP
 DIR=$DIR_TEMP
