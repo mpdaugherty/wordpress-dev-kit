@@ -40,7 +40,7 @@ FLUSH PRIVILEGES;
 
 echo $LOCAL_SQL > wp_setup_local_sql.sql
 
-echo "Run this SQL:"
+echo "Run this SQL (saved in wp_setup_local_sql.sql):"
 cat wp_setup_local_sql.sql
 
 # TODO: RUN THE SQL
