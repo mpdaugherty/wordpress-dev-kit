@@ -10,11 +10,11 @@ while [ -h "$SOURCE" ] ; do SOURCE="$(readlink "$SOURCE")"; done
 # Get an absolute path to the directory that contains this file
 DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 
-read -p "What is your host name? (e.g. the @xyz.com when you SSH) " HOSTNAME
-read -p "What is your remote username? " USERNAME
-read -p "Where is your SSH key file? " SSHKEY
-read -p "What is the URL at which you will install this blog? (No http/s://) " URL
-read -p "Who is your site's admin? " ADMIN
+read -p "What is your host name? (e.g. the @xyz.com when you SSH)\n  " HOSTNAME
+read -p "What is your remote username?\n  " USERNAME
+read -p "Where is your SSH key file?\n  " SSHKEY
+read -p "What is the URL at which you will install this blog? (No http/s://)\n  " URL
+read -p "Who is your site's admin?\n  " ADMIN
 
 # With all that info, we can create a config.py file
 cd $DIR/..
@@ -27,9 +27,9 @@ ADMIN = \"$ADMIN\"
 " > config.py
 
 # We can also set up a local database for this site
-read -p "What is your desired MySQL DB Name? " DB_NAME
-read -p "What is your desired DB user name?  " DB_USERNAME
-read -p "What is your desired DB password?   " DB_PSWD
+read -p "What is your desired MySQL DB Name?\n  " DB_NAME
+read -p "What is your desired DB user name?\n  " DB_USERNAME
+read -p "What is your desired DB password?\n  " DB_PSWD
 
 LOCAL_SQL="
 create database $DB_NAME;
@@ -40,10 +40,10 @@ FLUSH PRIVILEGES;
 
 echo $LOCAL_SQL > wp_setup_local_sql.sql
 
-echo "Run this SQL (saved in wp_setup_local_sql.sql):"
+echo "\nYou need to run this SQL (saved in wp_setup_local_sql.sql):\n"
 cat wp_setup_local_sql.sql
 
-read -p "If you'd like to run this SQL immediately, enter your MySQL root username (otherwise, enter nothing): " DB_ROOT_USER
+read -p "\nIf you'd like to execute this immediately, enter your MySQL root username (otherwise, enter nothing):\n  " DB_ROOT_USER
 if [ $DB_ROOT_USER ]
 then
     mysql -u $DB_ROOT_USER -p < wp_setup_local_sql.sql
@@ -51,6 +51,7 @@ fi
 
 # TODO: make wp-config.php from info
 
+echo '\nPlease visit '`pwd`'/temp_wp/wp-admin in your web browser to complete installation and install your custom theme'
 
 # Restore old values for variables
 SOURCE=$SOURCE_TEMP

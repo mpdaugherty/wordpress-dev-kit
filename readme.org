@@ -1,0 +1,79 @@
+* Wordpress Dev Kit
+
+This dev kit provides a fast, standardized way to get started building and managing a custom Wordpress site for your clients.  You can develop and test locally, and deploy to your server with just one command.
+
+** Local Installation
+
+First, start by cloning this repository locally.  Rename the directory to whatever you want to call your project.
+
+#+BEGIN_SRC shell
+$ git clone https://github.com/mpdaugherty/wordpress-dev-kit.git
+$ mv wordpress-dev-kit <project_name>
+$ cd <project_name>
+#+END_SRC
+
+To set up the local install, make sure mysql is running, then execute the init script and answer its questions:
+
+#+BEGIN_SRC shell
+$ bin/init.sh
+What is your host name? (e.g. the @xyz.com when you SSH)
+  example.com
+What is your remote username?
+  example
+Where is your SSH key file? ~/.ssh/id-rsa
+What is the URL at which you will install this blog? (No http/s://)
+  www.example.com
+Who is your site's admin?
+  admin@example.com
+What is your desired MySQL DB Name?
+  example_wp
+What is your desired DB user name?
+  ex_wp_user
+What is your desired DB password?
+
+You need to run this SQL (saved in wp_setup_local_sql.sql):
+
+create database example_wp; create user 'ex_wp_user'@'localhost' identified by 'a'; GRANT ALL ON example_wp.* to 'DB_USERNAME'@'localhost'; FLUSH PRIVILEGES;
+
+If you'd like to execute this immediately, enter your MySQL root username (otherwise, enter nothing):
+#+END_SRC
+
+** Developing your theme
+
+Create your custom theme in the theme/ folder.  To view your test site, open the test_wp folder in your webbrowser.  Be sure to visit /wp-admin to log in to install your theme, create test posts, etc.
+
+** Deployment
+
+*** Pre-deployment set up
+
+You need to set up your DNS records so that your desired URL points to your host.
+
+Your host also needs to have apache installed with mod-php enabled.
+
+This has only been tested on Ubuntu.  If you are using a different distro for your server and find it does not work, let me know; I'll try to fix it.
+
+*** Deploy script usage
+
+To use the included deployment script, you must have python and [[http://fabfile.org/][fabric]] installed.
+
+Then, while in your project root directory, just run
+
+#+BEGIN_SRC shell
+fab deploy
+#+END_SRC
+
+*** What it does
+
+The fabric script will log into your remote host and create a folder for wordpress at /var/www/project-name/
+
+Inside there, it installs wordpress and your custom theme.
+
+After that, it installs a new apache virtualhost corresponding to the URL you decided upon before.  This is located in /etc/apache2/sites-available/<your url>.conf
+
+Finally, it reloads apache so that the new site will be enabled.
+
+** Feedback
+
+Add bug reports and feature requests as issues in this github repository (and add a patch if you're feeling generous!)
+
+For other feedback, questions, etc., you can contact me at wp@mpdaugherty.com.
