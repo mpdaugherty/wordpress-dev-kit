@@ -72,6 +72,17 @@ After that, it installs a new apache virtualhost corresponding to the URL you de
 
 Finally, it reloads apache so that the new site will be enabled.
 
+** Upgrading
+
+Upgrading the deployment scripts, etc. is simple; Just pull from this repository:
+
+#+BEGIN_SRC shell
+git pull upstream
+#+END_SRC
+
+You should manage upgrades to your installed Wordpress version and
+plugins through the Wordpress web interface as usual.
+
 ** Feedback
 
 Add bug reports and feature requests as issues in this github repository (and add a patch if you're feeling generous!)
