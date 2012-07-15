@@ -49,8 +49,15 @@ then
     mysql -u $DB_ROOT_USER -p < wp_setup_local_sql.sql
 fi
 
-# TODO: make wp-config.php from info
 
+# Create a new wp-config file from the info from the user
+cp test_wp/wp-config-sample.php test_wp/wp-config.php
+sed -i '' "s/database_name_here/$DB_NAME" test_wp/wp-config.php
+sed -i '' "s/username_here/$DB_USERNAME" test_wp/wp-config.php
+sed -i '' "s/password_here/$DB_PSWD" test_wp/wp-config.php
+bin/update_wp_salts.py
+
+# Done!
 echo '\nPlease visit '`pwd`'/temp_wp/wp-admin in your web browser to complete installation and install your custom theme'
 
 # Restore old values for variables
