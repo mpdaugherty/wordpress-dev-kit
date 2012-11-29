@@ -52,9 +52,9 @@ fi
 
 # Create a new wp-config file from the info from the user
 cp test_wp/wp-config-sample.php test_wp/wp-config.php
-sed -i '' "s/database_name_here/$DB_NAME" test_wp/wp-config.php
-sed -i '' "s/username_here/$DB_USERNAME" test_wp/wp-config.php
-sed -i '' "s/password_here/$DB_PSWD" test_wp/wp-config.php
+sed -i '' "s/database_name_here/$DB_NAME/g" test_wp/wp-config.php
+sed -i '' "s/username_here/$DB_USERNAME/g" test_wp/wp-config.php
+sed -i '' "s/password_here/$DB_PSWD/g" test_wp/wp-config.php
 bin/update_wp_salts.py
 
 # Done!
